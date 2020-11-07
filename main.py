@@ -2,20 +2,17 @@ from random import *
 
 
 # The d20 dice
-# PH I think this can return 0 - is that what you want?
 def d20():
     return randint(0, 21)
 
-# PH Clear what - perhaps clearScreen. Don't need to return a value.
+
 def clear():
     print("\n" * 100)
-    return True
 
-# PH Don't need to return a value.
+
 def user_move_on():
     user_action = input()
     clear()
-    return True
 
 
 # Text stored here so code is less jumbled
@@ -66,13 +63,17 @@ def fight_one_intro():
     return True
 
 
+def add_to_file(string):
+    fight_info_file = open("fight_info.txt", "a")
+    fight_info_file.write(string)
+    fight_info_file.close()
+
+
 # Prints out how each team is doing at the beginning of each turn to help inform the player
 def the_standings(goodGuys_team, badGuys_team):
     print("-" * 79 + "\n The Standings\n" + "-" * 79 + "\n")
     print("Your Team:")
     # Prints out each member on your team's, health and action points
-    ## PH This printing of the teams should be a method and  where you pass in the team list (goodGuys or badGuys)
-    ## PH add a print_teams() method.
     for key in goodGuys_team:
         print("\n" + str(key) + "\n HP:" + str(goodGuys_team[key]['health']) + "\nAP:" + str(
             goodGuys_team[key]['action_points']) + "\n")
@@ -84,6 +85,40 @@ def the_standings(goodGuys_team, badGuys_team):
     return True
 
 
+def print_miss_action(name, action, roll, target):
+    to_print = (name + " used their " + action + " and rolled a(n) " + str(roll) + " missing " + target)
+    print(to_print)
+    add_to_file(to_print)
+
+
+def print_heal_action(name, action, roll, target, effect):
+    to_print = (name + " used " + action + " and rolled a(n) " + str(
+        roll) + " succeeding healing " + target + " for " + str(
+        effect) + " health")
+    print(to_print)
+    add_to_file(to_print)
+
+
+def print_harm_action(name, action, roll, target, effect):
+    to_print = (name + " used their " + action + " and rolled a(n) " + str(
+        roll) + " hitting " + target + " for " + str(
+        effect) + " damage")
+    print(to_print)
+    add_to_file(to_print)
+
+
+def print_rest(name):
+    to_print = (name + " rested regaining 2 Action Points")
+    print(to_print)
+    add_to_file(to_print)
+
+
+def print_person_down(name):
+    to_print = (name + " has fallen and is unable to fight")
+    print(to_print)
+    add_to_file(to_print)
+
+
 # Gets the action the user wants to preform, it also prints out the actions the player can do, what they do,
 # and how many action points it costs
 def user_action(goodGuys_team, pname):
@@ -91,7 +126,7 @@ def user_action(goodGuys_team, pname):
     print("Player Turn!")
     # Prints out the users health and action points
     print("-" * 79 + "\n" + str(pname) + "  HP: " + str(goodGuys_team[pname]['health']) + " AP: " + str(
-        goodGuys_team[pname]['health']) + "\n" + "-" * 79)
+        goodGuys_team[pname]['action_points']) + "\n" + "-" * 79)
     # Prints out each action, what it does, and how many action points it costs
     for key, value in (goodGuys_team[pname]['inventory']).items():
         print(str(key.capitalize()) + ", " + str(
@@ -108,15 +143,16 @@ def user_action(goodGuys_team, pname):
                 return key.lower()
         # Prints out letting the user know they entered and incorrect value
         else:
-            ## PH Should like list all the valid commands.
             print("Please enter a proper value(ie enter 'heal', if you want to heal)")
 
 
-## PH You perhaps want to have this method call a new method player_turn_outcome_damage / player_turn_outcome_help to make it a little shorter.
 def player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_points):
-    fight_info = open("fight_info", "a")
-
     # If the player chooses a harmful attack they will target the enemy team
+    if goodGuys_team[pname]["inventory"][action]["ap_cost"] > goodGuys_team[pname]['action_points']:
+        print("Error you only have " + str(goodGuys_team[pname]['action_points']) + "action point(s) please heal or "
+                                                                                    "chose an action that costs less")
+        return -1
+
     if goodGuys_team[pname]["inventory"][action]['type'] == "damage":
         print("Who do you want to target?\n")
         # Printing out the name of each enemy
@@ -124,7 +160,6 @@ def player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_p
             print(enemy_names + "\n")
         # Capitalizing it in cause the player didn't
         target = (input("Enter your Target here:\n")).capitalize()
-
         # Removes the number of action points the attack costs
         goodGuys_team[pname]['action_points'] = goodGuys_team[pname]['action_points'] - \
                                                 goodGuys_team[pname]["inventory"][action]["ap_cost"]
@@ -139,13 +174,12 @@ def player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_p
             # Add experience points for the hit
             experience_points = experience_points + 50
             # Print out what happened
-            print(pname + " used " + action + " and rolled a(n) " + str(roll) + " hitting " + target + " for " +
-                  str(goodGuys_team[pname]["inventory"][action][
-                          'effect']) + " health")
+            print_harm_action(pname, action, roll, target, goodGuys_team[pname]["inventory"][action][
+                'effect'])
         # If it does not hit
         elif roll < 10:
             # Prints out what happened
-            print(pname + " used " + action + " and rolled a(n) " + str(roll) + " missing " + target)
+            print_miss_action(pname, action, roll, target)
 
     # If the player chooses a helpful attack it will ask which person on their team to target
     if goodGuys_team[pname]["inventory"][action]['type'] == "help":
@@ -154,7 +188,7 @@ def player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_p
             goodGuys_team[pname]["action_points"] = goodGuys_team[pname]["action_points"] + \
                                                     goodGuys_team[pname]["inventory"][action]['effect']
             # Print out what happened
-            print("The player rested regaining 2 Action Points")
+            print_rest(pname)
             return goodGuys_team, badGuys_team, action, pname
         # Printing out all players on their team
         print("Who do you want to target?\n")
@@ -178,30 +212,27 @@ def player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_p
                 # Add experience points for the hit
                 experience_points = experience_points + 50
                 # Print out what happens
-                print(pname + " used " + action + " and rolled a(n) " + str(
-                    roll) + " succeeding healing" + target + " for " + str(
-                    goodGuys_team[pname]["inventory"][action]['effect']) + " health")
+                print_heal_action(pname, action, roll, target, goodGuys_team[pname]["inventory"][action][
+                    'effect'])
+
             # If it fails
             if roll < 10:
                 # Prints out what happened
-                print(pname + " used " + action + " and rolled a(n) " + str(roll) + " failing to heal " + target)
-                return goodGuys_team, badGuys_team, action, pname, experience_points
-
+                print_miss_action(pname, "heal", roll, target)
             # If it fails terribly
             if roll < 4:
                 # Takes the heal away
                 goodGuys_team[target]["health"] = goodGuys_team[target]["health"] - \
                                                   goodGuys_team[pname]["inventory"][action]['effect']
-                print(pname + " used " + action + " and rolled a(n) " + str(
+                to_print = (pname + " used " + action + " and rolled a(n) " + str(
                     roll) + " failing horribly " + target + " hurting them for " +
-                      str(goodGuys_team[pname]["inventory"][action]['effect']) + " damage")
+                            str(goodGuys_team[pname]["inventory"][action]['effect']) + " damage")
+                print(to_print)
+                add_to_file(to_print)
 
     return goodGuys_team, badGuys_team, action, pname, experience_points
 
 
-## PH Not 100% sure, but seems like Danielle and Peter have similar code happening here. Perhaps you want to have a method
-## called good_guys_NPC_turn_for_player where you pass in Peter or Danielle as a parameter (and perhaps a few other varaibles
-## if the code between the two is subtly different.) Look to see what parameters you need to not have all this code duplicated (e.g player_turn, player_to_heal)
 def good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points):
     # initializing variables
     highestHealth_NPC = ""
@@ -214,7 +245,7 @@ def good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points):
 
     # Checks if Danielle is still alive
     if goodGuys_team["Danielle"]['health'] <= 0:
-        print("Danielle has fallen and is unable to fight")
+        print_person_down("Danielle")
         # Danielle's battle AI
     else:
         # If Danielle has less than 2 AP points she will choose to rest
@@ -235,13 +266,12 @@ def good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points):
                 # Add experience points for the hit
                 experience_points = experience_points + 50
                 # Prints out what happens
-                print("Danielle used her bow and rolled a(n) " + str(
-                    roll) + " hitting " + highestHealth_NPC + " for " + str(
-                    3 + goodGuys_team["Danielle"]["level"]) + " damage")
+                print_harm_action("Danielle", "bow", roll, highestHealth_NPC,
+                                  3 + goodGuys_team["Danielle"]["level"])
             # If her roll fails
             elif roll < 10:
                 # Prints out what happens
-                print("Danielle used her bow and rolled a(n) " + str(roll) + " missing " + highestHealth_NPC)
+                print_miss_action("Danielle", "bow", roll, highestHealth_NPC)
 
         # If she is below 4 ap and less than or equal to 2 AP point she will attack the strongest enemy with her knife
         elif goodGuys_team["Danielle"]['action_points'] >= 2:
@@ -257,17 +287,16 @@ def good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points):
                 # Add experience points for the hit
                 experience_points = experience_points + 50
                 # Prints out what happens
-                print("Danielle used her knife and rolled a(n) " + str(
-                    roll) + " hitting " + highestHealth_NPC + " for " + str(
-                    3 + goodGuys_team["Danielle"]["level"]) + " damage")
+                print_harm_action("Danielle", "knife", roll, highestHealth_NPC,
+                                  1 + goodGuys_team["Danielle"]["level"])
             # If her roll fails
             elif roll < 10:
                 # Prints out what happens
-                print("Danielle used her knife and rolled a(n) " + str(roll) + " missing " + highestHealth_NPC)
+                print_miss_action("Danielle", "knife", roll, highestHealth_NPC)
 
     # Checks if Peter is still alive
     if goodGuys_team['Peter']['health'] <= 0:
-        print("Peter has fallen and is unable to fight")
+        print_person_down("Peter")
     else:
         # Peter's battle AI
         lowestHealth_Ally = pname
@@ -296,13 +325,14 @@ def good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points):
                     # Prints out what happens
                     # Add experience points for the hit
                     experience_points = experience_points + 50
-                    print("Peter rolled a(n) " + str(roll) + " healing " + lowestHealth_Ally + " for " + str(
-                        2 + goodGuys_team['Peter']['level']) + " health")
+                    print_heal_action("Peter", "heal", roll, str(lowestHealth_Ally)
+                                      ,
+                                      2 + goodGuys_team['Peter']['level'])
                     # Returns  here so that he doesn't heal more than 1 person per turn
                     return goodGuys_team, badGuys_team, experience_points
                 # If the roll fails
                 elif roll < 10:
-                    print("Peter tried to heal " + lowestHealth_Ally + " but rolled a(n) " + str(roll) + " and failing")
+                    print_miss_action("Peter", "heal", roll, str(lowestHealth_Ally))
                     #  Returns  here so that he doesn't heal more than 1 person per turn
                     return goodGuys_team, badGuys_team, experience_points
                 # He is too good to fail tremendously (I don't want him accidentally killing the player)
@@ -314,13 +344,11 @@ def good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points):
                 experience_points = experience_points + 50
                 badGuys_team[highestHealth_NPC]['health'] = badGuys_team[highestHealth_NPC]['health'] - (
                         4 + goodGuys_team["Peter"]["level"])
-                print("Peter used his fireball and rolled a(n) " + str(
-                    roll) + " hitting " + highestHealth_NPC + " for " + str(
-                    4 + goodGuys_team["Peter"]["level"]) + " damage")
+                print_harm_action("Peter", "fireball", roll, highestHealth_NPC,
+                                  4 + goodGuys_team["Peter"]["level"])
                 return goodGuys_team, badGuys_team, experience_points
             if roll < 10:
-                print("Peter used his fireball and rolled a(n) " + str(roll) + " missing " + highestHealth_NPC)
-
+                print_miss_action("Peter", "fireball", roll, highestHealth_NPC)
     return goodGuys_team, badGuys_team, experience_points
 
 
@@ -336,17 +364,17 @@ def normal_bad_guys_turn(goodGuys_team, badGuys_team, special_event):
     # Goes through each bad guy so they have a chance to attack
     for bad_guy in badGuys_team:
         if badGuys_team[bad_guy]['health'] <= 0:
-            print(bad_guy + " can no longer fight")
+            print_person_down(bad_guy)
         else:
             if special_event == 1:
-                if badGuys_team[0]['health'] <= 5:
+                if badGuys_team['Alastair']['health'] <= 5:
                     print("Add text Alistair where puts on a right he believes to be the one Ring from The Hobbit and "
                           "gets annoyed when it doesn't work ")
             # If their action points are less than 2 they choose to rest
             if badGuys_team[bad_guy]["action_points"] <= 2:
                 badGuys_team[bad_guy]['action_points'] = badGuys_team[bad_guy]['action_points'] + 2
                 # Prints out what happens
-                print(bad_guy + " chose to rest and gain 2 action points ")
+                print_rest(bad_guy)
             # If their action points are above 2 they choose to attack
             elif badGuys_team[bad_guy]["action_points"] > 2:
                 roll = d20()
@@ -357,12 +385,11 @@ def normal_bad_guys_turn(goodGuys_team, badGuys_team, special_event):
                     # removes the health from the target they attack
                     goodGuys_team[lowestHealth_NPC]['health'] = goodGuys_team[lowestHealth_NPC]['health'] - damage
                     # Prints out what happens
-                    print(bad_guy + " rolled a(n) " + str(roll) + " hitting " + lowestHealth_NPC + " for " + str(
-                        damage) + " damage")
+                    print_harm_action(bad_guy, "slashed", roll, lowestHealth_NPC, damage)
                 # If their roll fails
                 elif roll < 10:
                     # Prints out what happens
-                    print(bad_guy + " rolled a(n) " + str(roll) + " missing " + lowestHealth_NPC)
+                    print_miss_action(bad_guy, "slashed", roll, lowestHealth_NPC)
     return goodGuys_team, badGuys_team
 
 
@@ -376,7 +403,6 @@ def fight(goodGuys_team, badGuys_team, pname, experience_points, special_event):
             return -1
         # Goes through each enemy in the list (regular indexing doesn't work cause dictionaries)
 
-        ## PH for key in badGuys_team.keys() is probably what you want here.
         # Currently not working rn
         for key in badGuys_team:
             # Adds 1 to the number of dead if the enemies health has reached 0
@@ -391,9 +417,15 @@ def fight(goodGuys_team, badGuys_team, pname, experience_points, special_event):
         user_move_on()
 
         action = (user_action(goodGuys_team, pname)).lower()
-        player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_points)
+        outcome = player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_points)
+        while outcome == -1:
+            action = (user_action(goodGuys_team, pname)).lower()
+            outcome = player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_points)
+            if outcome != -1:
+                break
+
         good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points)
-        normal_bad_guys_turn(goodGuys_team, badGuys_team)
+        normal_bad_guys_turn(goodGuys_team, badGuys_team, special_event)
 
 
 def level_up(goodGuys, p_name):
@@ -421,7 +453,6 @@ def level_up(goodGuys, p_name):
     for key in goodGuys:
         goodGuys[key]['level'] = goodGuys[key]['level'] + 1
 
-## PH Code below looks like it can be refactored into a function.
     # Increases Peter's health first then his action points, in order
     if goodGuys['Peter']['level'] % 2 == 0:
         goodGuys['Peter']['health'] = goodGuys['Peter']['health'] + 5
@@ -439,7 +470,7 @@ def level_up(goodGuys, p_name):
         print(str(goodGuys["Danielle"]['action_points']))
 
 
-def leveledLootSystem(goodGuys, pname, player_inventory):
+def leveledLootSystem(goodGuys, player_inventory):
     if goodGuys[p_name]["level"] >= 2:
         print("Congrats you found a firework spell!")
         firework_stats = {"name": "firework", "explanation": "Deals 6 damage", "type": "damage", "effect": 6,
@@ -458,10 +489,6 @@ def does_game_continue(fight_outcome):
             return False
         if continue_playing.lower() == "yes":
             return True
-
-
-def boss_fight(goodGuys, boss_fight, player_name, experience_points, special_event):
-    return True
 
 
 def playGame(player_name):
@@ -513,7 +540,7 @@ def playGame(player_name):
         if experience_points >= 800:
             level_up(goodGuys, player_name)
             experience_points = 0
-        leveledLootSystem(goodGuys, player_name, player_inventory)
+        leveledLootSystem(goodGuys, player_inventory)
 
     return True
 
