@@ -2,15 +2,16 @@ from random import *
 
 
 # The d20 dice
+# PH I think this can return 0 - is that what you want?
 def d20():
     return randint(0, 21)
 
-
+# PH Clear what - perhaps clearScreen. Don't need to return a value.
 def clear():
     print("\n" * 100)
     return True
 
-
+# PH Don't need to return a value.
 def user_move_on():
     user_action = input()
     clear()
@@ -70,6 +71,8 @@ def the_standings(goodGuys_team, badGuys_team):
     print("-" * 79 + "\n The Standings\n" + "-" * 79 + "\n")
     print("Your Team:")
     # Prints out each member on your team's, health and action points
+    ## PH This printing of the teams should be a method and  where you pass in the team list (goodGuys or badGuys)
+    ## PH add a print_teams() method.
     for key in goodGuys_team:
         print("\n" + str(key) + "\n HP:" + str(goodGuys_team[key]['health']) + "\nAP:" + str(
             goodGuys_team[key]['action_points']) + "\n")
@@ -105,9 +108,11 @@ def user_action(goodGuys_team, pname):
                 return key.lower()
         # Prints out letting the user know they entered and incorrect value
         else:
+            ## PH Should like list all the valid commands.
             print("Please enter a proper value(ie enter 'heal', if you want to heal)")
 
 
+## PH You perhaps want to have this method call a new method player_turn_outcome_damage / player_turn_outcome_help to make it a little shorter.
 def player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_points):
     fight_info = open("fight_info", "a")
 
@@ -194,6 +199,9 @@ def player_turn_outcome(goodGuys_team, badGuys_team, action, pname, experience_p
     return goodGuys_team, badGuys_team, action, pname, experience_points
 
 
+## PH Not 100% sure, but seems like Danielle and Peter have similar code happening here. Perhaps you want to have a method
+## called good_guys_NPC_turn_for_player where you pass in Peter or Danielle as a parameter (and perhaps a few other varaibles
+## if the code between the two is subtly different.) Look to see what parameters you need to not have all this code duplicated (e.g player_turn, player_to_heal)
 def good_guys_NPC_turn(goodGuys_team, badGuys_team, pname, experience_points):
     # initializing variables
     highestHealth_NPC = ""
@@ -368,6 +376,7 @@ def fight(goodGuys_team, badGuys_team, pname, experience_points, special_event):
             return -1
         # Goes through each enemy in the list (regular indexing doesn't work cause dictionaries)
 
+        ## PH for key in badGuys_team.keys() is probably what you want here.
         # Currently not working rn
         for key in badGuys_team:
             # Adds 1 to the number of dead if the enemies health has reached 0
@@ -412,6 +421,7 @@ def level_up(goodGuys, p_name):
     for key in goodGuys:
         goodGuys[key]['level'] = goodGuys[key]['level'] + 1
 
+## PH Code below looks like it can be refactored into a function.
     # Increases Peter's health first then his action points, in order
     if goodGuys['Peter']['level'] % 2 == 0:
         goodGuys['Peter']['health'] = goodGuys['Peter']['health'] + 5
