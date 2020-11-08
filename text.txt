@@ -1,0 +1,58 @@
+﻿Intro()
+You enter the land of Sènes where some say the land is as old as time itself flanked on either side by your friends Peter and Danielle.
+Peter smiled towards the horizon, he’s been your friend for forever, a kind soul, the meaning of lawful good. Danielle you’ve known for a
+couple of years but you grew close quickly, she doesn’t seem as interested, a chaotic neutral. “This is stupid, Chaotic Neutral? What does
+that even mean! This game is too nerdy if people at school knew we were playing this we’d never live it down.” she said angrily while biting
+into a large piece of pizza. “Hey, Peter set this up for us just be quite your running the emersion.” You reply scowling at Danielle. Peter gave
+an awkward smile and continued. This evil world is controlled by a powerful wizard named Officium! “What’s that latin for? Dumbass?” Danielle
+laughed quietly to herself. It’s your job as a young adventurers to destroy his evil grip on the world and find peace. Good Luck!
+
+Intro_to_fight_one()
+After a while of traveling you enter a small forest clearing. “I roll a perception check.” you say while rolling a dice, “Yes a 16!”. You listen
+carefully and hear what sound like two voices in the background. They jump out brandishing their fierce claws! A level 1 and level 2 goblin approach
+and attack you!
+You encountered:
+Goblin 1 HP:10 LV: 1
+Goblin 2 HP:15 LV:2
+They don't look too difficult
+Goblin 2: Hey! My name's Alastair and this is my friend Prescott. I think we deserve to actually have our names said!
+With that Danielle smiles and lets a small chuckle but quickly hides it. "Uhhh ok"
+
+You encountered:
+Alastair HP:10 LV: 1
+Prescott HP:15 LV:2
+Alastair: Thank you, now prepare to die!
+
+
+Intro_to_fight_two()
+“Ha we totally kicked their butts!” Danielle exclaimed excitedly. Congrats adventures you’ve completed the first battle but what comes next.
+A while passes and your party has grown, not in numbers but, as some would say, wisdom. Peter seemed distracted while frantically writing something
+down.“It’s time to chill dude this is our night of fun before the big exam,” you say smiling. “I can’t ‘chill’ this decides what highschool
+what we get into, which determines our university chances, which determines what jobs well get, and if I don’t get into a good university,
+then I won’t get a good job, and if-” Peter’s ranting was cut off short by Danielle who had heard this spiral too many times to count
+“and if you don’t get a good job, you won’t make money, and if you don’t make money, you’ll be homeless and live on the streets,” she said
+laughing. “Precisely,” Peter replied, grabbing a red bull. “Stop spiraling, you'll be fine you’re the smartest kid in our class just please,
+take a break,” you say pleadingly. “Fine,” Peter replies, putting down his notepad. “It’s all gonna be fine,” Danielle says laughing.
+You pass through a small town just as a couple villagers run past you fleeing from something. “Looks like someone needs our help!” Danelle says nudging Peter.
+From the commotion emerges what look like two small rabbits. Just as Peter begins to laugh one of the bunnies latch onto a fleeing villager ripping their throat out.
+
+You encountered:
+Fluffy HP:15 LV: 2
+Hoppy HP:15 LV:2
+Cinnabun HP:20 LV: 3
+Very fitting names. I wonder what they might be in reference to?
+
+Boss Fight()
+You enter the dark and eerie castle of Officum alone. The dark shades of purple protruding from the castle grounds seemed to have
+seeped into the lush forest like some horrible plague. The sky is dark and just the sight of this large castle ahead of you fills
+you with dread trying to strip out any hope you may still be holding onto. But you enter anyway because there’s no way but forward.
+
+Boss_first_ end()
+You feel your body giving up as you shrink to the floor gasping for air “It’s not fair!” You yell into the void, but no one answers.
+
+Boss_fight_help()
+Just as you start to feel the unfamiliar grasp of defeat set in a bright spark fills your heart healing you to full health. “Hey idiot you didn’t think you could get through this alone could you?” Danelle said standing at your side. “Ya c’mon dude we’re always here for you!” Peter said running up and hugging you. Danelle smiled, giving you a hard but friendly pat on the back, “Let’s beat this nobody together, no point in doing it alone.” You feel a sense of hope rising in your chest, and this hope becomes your weapon. Congrats! You gain the sword of hope, I don’t have time to come up with a more creative name so it’ll have to do. With your friends at your side, you may fall down, you may struggle but in the end you will win!
+
+Game_ending()
+“So that's the end,” Peter said smiling “we won and conquered evil!”. “Don’t worry I’m sure this won’t be the last challenge we’ll have to face,” Danelle replied. “I think that's a good note to leave it on tonight though,” you say. “Good timing wanna head down to grab a drink, there’s someone very special I’d like you guys to meet,” Danelle said, grabbing her coat and keys. You and Peter both give each other an excited look and get ready to go. This particular campaign ends but it’s not over for our young-ish adventures and their team may grow in time. There will be more struggles, more hardships, but one thing that stays constant is your support. So don’t forget those who are close to you because you’re never truly alone!
+
