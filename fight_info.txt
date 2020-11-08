@@ -1,2 +1,23 @@
 This is a Print out of your fight information. Which moves you and everyone else made are recorded here.
-Amelie rested regaining 2 Action PointsDanielle used their bow and rolled a(n) 3 missing PrescottPeter used their heal and rolled a(n) 1 missing AmelieAlastair used their slashed and rolled a(n) 17 hitting Amelie for 3 damagePrescott used their slashed and rolled a(n) 13 hitting Amelie for 6 damage
+Alastair used their slashed and rolled a(n) 6 missing Test1
+Prescott used their slashed and rolled a(n) 19 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair rested regaining 2 Action Points
+Prescott used their slashed and rolled a(n) 15 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott rested regaining 2 Action Points
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott rested regaining 2 Action Points
