@@ -120,6 +120,7 @@ def boss_fight(good_guys_team, bad_guys_team):
     # initializing variables
     target = lowest_health_target(good_guys_team)
     roll = d20()
+    # Has different moves based on dice rolls changing the boss's attack pattern and has no Action Points
     if roll == 20:
         good_guys_team[target]["health"] = good_guys_team[target]["health"] - 20
         print_harm_action("Officium", "random", roll, target, 20)
@@ -212,12 +213,12 @@ def player_turn(good_guys_team, bad_guys_team, action, player_name, experience_p
         roll = d20()
         # If it hits
         if roll >= 10:
+            # Add experience points for the hit
+            experience_points = experience_points + 50
             # The amount of damaged is removed from the targets health
             bad_guys_team[target]["health"] = bad_guys_team[target]["health"] - \
                                               good_guys_team[player_name]["inventory"][action][
                                                   'effect']
-            # Add experience points for the hit
-            experience_points = experience_points + 50
             # Print out what happened
             print_harm_action(player_name, action, roll, target, good_guys_team[player_name]["inventory"][action][
                 'effect'])
@@ -251,11 +252,11 @@ def player_turn(good_guys_team, bad_guys_team, action, player_name, experience_p
         if action == 'heal':
             # If it succeeds
             if roll >= 10:
+                # Add experience points for the hit
+                experience_points = experience_points + 50
                 # Heals the target
                 good_guys_team[target]["health"] = good_guys_team[target]["health"] + \
                                                    good_guys_team[player_name]["inventory"][action]['effect']
-                # Add experience points for the hit
-                experience_points = experience_points + 50
                 # Print out what happens
                 print_heal_action(player_name, action, roll, target, good_guys_team[player_name]["inventory"][action][
                     'effect'])
@@ -287,7 +288,7 @@ def do_allies_need_healing(team, player_name):
             if team[key]["health"] <= lowestHealth:
                 lowestHealth_Ally = str(key)
                 lowestHealth = team[key]['health']
-
+    # returns -1 if no one needs to be healed, and the ally with the lowest health if they need to be healed
     return lowestHealth_Ally
 
 
@@ -328,11 +329,11 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
             roll = d20()
             # If her roll succeeds
             if roll >= 10:
+                # Add experience points for the hit
+                experience_points = experience_points + 50
                 # Remove health from the enemy she targets for amount of damage she does (at her current level)
                 bad_guys_team[target]['health'] = bad_guys_team[target]['health'] - (
                         4 + good_guys_team["Danielle"]["level"])
-                # Add experience points for the hit
-                experience_points = experience_points + 50
                 # Prints out what happens
                 print_harm_action("Danielle", "bow", roll, target,
                                   4 + good_guys_team["Danielle"]["level"])
@@ -350,11 +351,11 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
             roll = d20()
             # If her roll succeeds
             if roll >= 10:
+                # Add experience points for the hit
+                experience_points = experience_points + 50
                 # Remove health from the enemy she targets for amount of damage she does (at her current level)
                 bad_guys_team[target]['health'] = bad_guys_team[target]['health'] - (
                         2 + good_guys_team["Danielle"]["level"])
-                # Add experience points for the hit
-                experience_points = experience_points + 50
                 # Prints out what happens
                 print_harm_action("Danielle", "knife", roll, target,
                                   2 + good_guys_team["Danielle"]["level"])
@@ -381,12 +382,12 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
             roll = d20()
             # If it succeeds
             if roll >= 10:
+                # Add experience points for the hit
+                experience_points = experience_points + 50
                 # Heals the player the correct amount for his current level
                 good_guys_team[lowestHealth_Ally]['health'] = good_guys_team[lowestHealth_Ally]['health'] + (
                         2 + good_guys_team['Peter']['level'])
-                # Prints out what happens
-                # Add experience points for the hit
-                experience_points = experience_points + 50
+                # Prints out what happened
                 print_heal_action("Peter", "heal", roll, str(lowestHealth_Ally),
                                   2 + good_guys_team['Peter']['level'])
                 # Returns  here so that he doesn't heal more than 1 person per turn
@@ -403,8 +404,10 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
             if roll >= 10:
                 # Add experience points for the hit
                 experience_points = experience_points + 50
+                # Takes away the damage done
                 bad_guys_team[target]['health'] = bad_guys_team[target]['health'] - (
                         4 + good_guys_team["Peter"]["level"])
+                # Prints out what happened
                 print_harm_action("Peter", "fireball", roll, target,
                                   4 + good_guys_team["Peter"]["level"])
                 return experience_points
@@ -502,6 +505,7 @@ def level_up_Peter(good_guys):
 
 
 def level_up_Danielle(good_guys):
+    # Increases Danielle's action points first then her health, in order
     if good_guys["Danielle"]['level'] % 2 != 0:
         good_guys["Danielle"]['health'] = good_guys["Danielle"]['health'] + 15
         print(str(good_guys["Danielle"]['health']))
@@ -537,20 +541,24 @@ def level_up(good_guys, player_name):
 
 
 def leveled_loot_system(good_guys, player_inventory):
-    if good_guys[p_name]["level"] >= 2:
+    # If the player's level is less than or equal to 2 you can find a fire work
+    if good_guys[p_name]["level"] <= 2:
         print("Congrats you found a firework spell!")
         firework_stats = {"name": "firework", "explanation": "Deals 6 damage", "type": "damage", "effect": 6,
                           "ap_cost": 3}
         player_inventory["firework"] = firework_stats
+        return True
+    # If the player's level is greater than or equal to 3 you can find the holy hand grenade
     if good_guys[p_name]["level"] >= 3:
         print("Congrats you found a holy hand grenade")
         holy_hand_grenade_stats = {"name": "firework", "explanation": "Deals 8 damage", "type": "damage", "effect": 8,
                                    "ap_cost": 4}
         player_inventory["holy hand grenade"] = holy_hand_grenade_stats
+        return True
 
 
 def print_text_from_file(start_line, end_line, lines):
-    # Plays the first scene
+    # Extracts text from the given starting and end lines which is printed lie by line
     i = start_line
     while i <= end_line:
         print(lines[i])
@@ -627,25 +635,30 @@ def play_game(player_name):
         # this is helping when debugging
         saved_good_guys = copy.deepcopy(good_guys)
         saved_bad_guys = copy.deepcopy(bad_guys)
+        # sets the staring and ending line for each specific section
         start_line, end_line = stages_list[stage_counter]["TextLineToPrint"]
-
+        # prints out the text
         print_text_from_file(start_line, end_line, lines)
         # Do the fight
         experience_points = fight(good_guys, bad_guys, player_name, experience_points)
+        # if -1 experience points gets returned(<0) then the player has died
         if experience_points < 0:
             good_guys = saved_good_guys
             bad_guys = saved_bad_guys
             print("You Died. Don't lose hope!\n")
             add_to_file("You died\n")
             continue_playing = input("Do you want to continue(Yes/No)\n")
+            # if they player inputs no they don't want to continue the program ends
             if continue_playing.lower() == "no":
                 break
+            # Otherwise it will continue from the last stage the player was at
         else:
             stage_counter += 1
             bad_guys = stages_list[stage_counter]["bad_guys"]
             # Leveling up
             print("Congrats you won! You gained " + str(experience_points) + " experience points and " + str(
                 int(experience_points / 3)) + " coins.")
+            # if the group reaches 2000 experience points they are able to level up
             if experience_points >= 2000:
                 level_up(good_guys, player_name)
                 experience_points = experience_points - 2000
