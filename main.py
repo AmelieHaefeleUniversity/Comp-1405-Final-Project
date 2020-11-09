@@ -321,7 +321,7 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
         # If Danielle has less than 2 AP points she will choose to rest
         if good_guys_team["Danielle"]['action_points'] < 2:
             good_guys_team["Danielle"]['action_points'] = good_guys_team["Danielle"]['action_points'] + 2
-
+            return good_guys_team, bad_guys_team, experience_points
         # If Danielle is above 4 ap then use their strongest attack to attack the bad guy NPC with the most health
         elif good_guys_team["Danielle"]['action_points'] > 4:
             # Removes the number of action points it takes to use her bow
@@ -373,6 +373,7 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
         # If he has less than 4 action points he will chose to rest
         if good_guys_team['Peter']['action_points'] < 4:
             good_guys_team['Peter']['action_points'] = good_guys_team['Peter']['action_points'] + 2
+            return good_guys_team, bad_guys_team, experience_points
         # Checks if any of the members on his team are 10 health or below
         lowestHealth_Ally = do_allies_need_healing(good_guys_team, player_name)
         if lowestHealth_Ally != "-1":
@@ -569,7 +570,7 @@ def getGameData(player_name):
     player_inventory = {"knife": knife_stats, "bow": bow_stats, "fireball": fireball_stats, "rest": rest_stats,
                         "heal": heal_stats}
     # The good guys stats
-    player_stats = {"health": 20, "action_points": 0, "level": 1, "inventory": player_inventory}
+    player_stats = {"health": 20, "action_points": 10, "level": 1, "inventory": player_inventory}
     peter_stats = {"health": 20, "action_points": 10, "level": 1}
     danielle_stats = {"health": 20, "action_points": 10, "level": 1}
     # The good guys list
@@ -577,13 +578,13 @@ def getGameData(player_name):
     # Your experience points
     experience_points = 0
 
-    # Bad Guys and their stats TODO Change them back to original
+    # Bad Guys and their stats
     alastair_stats = {"health": 10, "action_points": 15, "level": 1}
-    prescott_stats = {"health": 10, "action_points": 15, "level": 2}
+    prescott_stats = {"health": 15, "action_points": 15, "level": 2}
     officium_stats = {"health": 20, "action_points": 10, "level": 1}
-    Fluffy_stats = {"health": 10, "action_points": 12, "level": 2}
-    Hoppy_stats = {"health": 10, "action_points": 12, "level": 2}
-    Cinnabun_stats = {"health": 10, "action_points": 10, "level": 3}
+    Fluffy_stats = {"health": 10, "action_points": 10, "level": 1}
+    Hoppy_stats = {"health": 15, "action_points": 12, "level": 2}
+    Cinnabun_stats = {"health": 20, "action_points": 8, "level": 3}
 
     # What fight consists of what bad guys
     fight_one = {"Alastair": alastair_stats, "Prescott": prescott_stats}

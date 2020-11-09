@@ -37,7 +37,7 @@ You pass through a small town just as a couple villagers run past you fleeing fr
 From the commotion emerges what look like two small rabbits. Just as Peter begins to laugh one of the bunnies latch onto a fleeing villager ripping their throat out.
 
 You encountered:
-Fluffy HP:15 LV: 2
+Fluffy HP:15 LV: 1
 Hoppy HP:15 LV:2
 Cinnabun HP:20 LV: 3
 Very fitting names. I wonder what they might be in reference to?
