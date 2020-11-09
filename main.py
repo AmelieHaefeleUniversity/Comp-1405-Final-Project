@@ -598,7 +598,7 @@ def getGameData(player_name):
     return good_guys, stages_list, experience_points
 
 
-def playGame(player_name):
+def play_game(player_name):
     read_file = open("text.txt", "r")
     lines = read_file.readlines()
     read_file.close()
@@ -658,4 +658,4 @@ def playGame(player_name):
 if __name__ == "__main__":
     p_name = "Amelie"
     # player_name = input("What is your name?")
-    playGame(p_name)
+    play_game(p_name)
