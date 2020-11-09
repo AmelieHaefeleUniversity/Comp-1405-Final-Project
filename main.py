@@ -4,6 +4,14 @@ import copy
 TEST_ROLLS = []
 
 
+def rules():
+    print("\nTo move through the game to get to another screen simply press enter or anything you want when prompted by\n"
+          "the console. At the start of your turn a list of all actions you can preform and information about them \n"
+          "will be displayed, simply type in the action you want to preform then hit enter. Similarly a list of\n"
+          "possible targets will be displayed. Enter the full name of your target into the console and hit enter.\n"
+          "Remember to have fun. Good luck!")
+
+
 # The d20 dice
 def d20():
     global TEST_ROLLS
@@ -673,6 +681,10 @@ def play_game(player_name):
 
 # Will only run when someone runs main.py to allow for simulated test
 if __name__ == "__main__":
-    p_name = "Amelie"
-    # player_name = input("What is your name?")
-    play_game(p_name)
+    rules()
+    player_name = input("What is your name?\n")
+    # Keeps going until it gets a valid name input
+    while player_name == "" or player_name is None:
+        print("Please enter a name\n")
+        player_name = input("What is your name?\n")
+    play_game(player_name)
