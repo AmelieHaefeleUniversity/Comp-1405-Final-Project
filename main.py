@@ -123,41 +123,41 @@ def boss_fight(good_guys_team, bad_guys_team):
     if roll == 20:
         good_guys_team[target]["health"] = good_guys_team[target]["health"] - 20
         print_harm_action("Officium", "random", roll, target, 20)
-        print("\nA perfect roll how about that!")
+        print("A perfect roll how about that!\n")
         return good_guys_team
     if roll > 18:
-        good_guys_team[target]['health'] = good_guys_team[target]['health'] - 10
-        print_harm_action("Officium", "random", roll, target, 10)
-        print("\nWow good luck doing better than that")
+        good_guys_team[target]['health'] = good_guys_team[target]['health'] - 8
+        print_harm_action("Officium", "random", roll, target, 8)
+        print("Wow good luck doing better than that\n")
         return good_guys_team
     if roll > 16:
-        bad_guys_team["Officium"]["health"] = bad_guys_team["Officium"]["health"] + 25
-        print_heal_action("Officium", "heal", roll, "Officium", 25)
-        print("\nHmm full health, don't mind if I do")
+        bad_guys_team["Officium"]["health"] = bad_guys_team["Officium"]["health"] + 10
+        print_heal_action("Officium", "heal", roll, "Officium", 10)
+        print("Hmm full health, don't mind if I do\n")
         return good_guys_team
     if roll > 12:
         good_guys_team[target]["health"] = good_guys_team[target]["health"] - 6
         print_harm_action("Officium", "random", roll, target, 6)
-        print("\nA normal attack? Huh I guess that'll do")
+        print("A normal attack? Huh I guess that'll do\n")
         return good_guys_team
     if roll > 6:
         print_miss_action("Officium", "random", roll, target)
-        print("\nDamn it")
+        print("Damn it\n")
         return good_guys_team
     if roll > 4:
         good_guys_team[target]["action_points"] = good_guys_team[target]["action_points"] - 4
         print_harm_action("Officium", "action drain", roll, target, 4)
-        print("\nYou can't do anything right")
+        print("You can't do anything right\n")
         return good_guys_team
     if roll > 2:
         bad_guys_team["Officium"]["health"] = bad_guys_team["Officium"]["health"] + 10
         print_heal_action("Officium", "heal", roll, "Officium", 10)
-        print("\nNothing you do can stop me")
+        print("Nothing you do can stop me\n")
         return good_guys_team
     if roll == 0:
         good_guys_team[target]["action_points"] = good_guys_team[target]["action_points"] - 2
         print_harm_action("Officium", "action drain", roll, target, 2)
-        print("\nYou're alone")
+        print("You're alone\n")
         return good_guys_team
 
 
@@ -389,12 +389,12 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
                 print_heal_action("Peter", "heal", roll, str(lowestHealth_Ally),
                                   2 + good_guys_team['Peter']['level'])
                 # Returns  here so that he doesn't heal more than 1 person per turn
-                return good_guys_team, bad_guys_team, experience_points
+                return experience_points
             # If the roll fails
             elif roll < 10:
                 print_miss_action("Peter", "heal", roll, str(lowestHealth_Ally))
                 #  Returns  here so that he doesn't heal more than 1 person per turn
-                return good_guys_team, bad_guys_team, experience_points
+                return experience_points
             # He is too good to fail tremendously (I don't want him accidentally killing the player)
         else:
             good_guys_team['Peter']['action_points'] = good_guys_team['Peter']['action_points'] - 3
@@ -491,20 +491,20 @@ def fight(good_guys_team, bad_guys_team, player_name, experience_points):
 def level_up_Peter(good_guys):
     # Increases Peter's health first then his action points, in order
     if good_guys['Peter']['level'] % 2 == 0:
-        good_guys['Peter']['health'] = good_guys['Peter']['health'] + 5
+        good_guys['Peter']['health'] = good_guys['Peter']['health'] + 15
         print(str(good_guys['Peter']['health']))
     else:
-        good_guys['Peter']['action_points'] = good_guys['Peter']['action_points'] + 5
+        good_guys['Peter']['action_points'] = good_guys['Peter']['action_points'] + 15
         print(str(good_guys['Peter']['action_points']))
     return good_guys
 
 
 def level_up_Danielle(good_guys):
     if good_guys["Danielle"]['level'] % 2 != 0:
-        good_guys["Danielle"]['health'] = good_guys["Danielle"]['health'] + 5
+        good_guys["Danielle"]['health'] = good_guys["Danielle"]['health'] + 15
         print(str(good_guys["Danielle"]['health']))
     else:
-        good_guys["Danielle"]['action_points'] = good_guys["Danielle"]['action_points'] + 5
+        good_guys["Danielle"]['action_points'] = good_guys["Danielle"]['action_points'] + 15
         print(str(good_guys["Danielle"]['action_points']))
     return good_guys
 
@@ -514,16 +514,16 @@ def level_up(good_guys, player_name):
     incorrect_value = True
     while incorrect_value:
         # Asks the player which stat they want to increase
-        want_to_increase = input("Would you like to increase your health or action points by 5?\n")
-        # If they want to increase health it increases by 5
+        want_to_increase = input("Would you like to increase your health or action points by 15?\n")
+        # If they want to increase health it increases by 15
         if want_to_increase == 'health':
-            good_guys[player_name]['health'] = good_guys[player_name]['health'] + 5
+            good_guys[player_name]['health'] = good_guys[player_name]['health'] + 15
             print(str(good_guys[player_name]['health']))
             # breaks out because the value entered was correct
             break
-        # If they want to increase action points it increases by 5
+        # If they want to increase action points it increases by 15
         if want_to_increase == 'action points':
-            good_guys[player_name]['action_points'] = good_guys[player_name]['action_points'] + 5
+            good_guys[player_name]['action_points'] = good_guys[player_name]['action_points'] + 15
             print(str(good_guys[player_name]['action_points']))
             # breaks out because the value entered was correct
             break
@@ -547,7 +547,7 @@ def leveled_loot_system(good_guys, player_inventory):
         player_inventory["holy hand grenade"] = holy_hand_grenade_stats
 
 
-def print_intro_text(start_line, end_line, lines):
+def print_text_from_file(start_line, end_line, lines):
     # Plays the first scene
     i = start_line
     while i <= end_line:
@@ -590,6 +590,7 @@ def getGameData(player_name):
     fight_two = {"Fluffy": Fluffy_stats, "Hoppy": Hoppy_stats, "Cinnabun": Cinnabun_stats}
     final_fight = {"Officium": officium_stats}
 
+    # Information that is included in each stage that it needs to have in order to run
     stages_list = [{"StageName": "First Fight", "TextLineToPrint": (10, 23), "bad_guys": fight_one},
                    {"StageName": "Second Fight", "TextLineToPrint": (28, 43), "bad_guys": fight_two},
                    {"StageName": "Boss Fight", "TextLineToPrint": (47, 49), "bad_guys": final_fight}]
@@ -604,22 +605,28 @@ def playGame(player_name):
 
     good_guys, stages_list, experience_points = getGameData(player_name)
 
+    # Opens the fight intro file so you can appened to it instead of writing
     fight_info = open("fight_info.txt", "w")
     fight_info.write("This is a Print out of your fight information. Which moves you and everyone else made are "
                      "recorded here.\n")
     fight_info.close()
-    stage_counter = 0
+    # Starts at stage 0
+    stage_counter = 2
 
-    print_intro_text(1, 7, lines)
+    # Reads out the Intro text
+    print_text_from_file(1, 7, lines)
 
-    bad_guys = stages_list[0]["bad_guys"]
+    bad_guys = stages_list[2]["bad_guys"]
     while stage_counter < len(stages_list):
 
+        # Saves stats so they don't get rest
+        # If you want to heal after every fight so it's easier set saved_good_guys = saved_good_guys
+        # this is helping when debugging
         saved_good_guys = copy.deepcopy(good_guys)
         saved_bad_guys = copy.deepcopy(bad_guys)
         start_line, end_line = stages_list[stage_counter]["TextLineToPrint"]
 
-        print_intro_text(start_line, end_line, lines)
+        print_text_from_file(start_line, end_line, lines)
         # Do the fight
         experience_points = fight(good_guys, bad_guys, player_name, experience_points)
         if experience_points < 0:
@@ -636,13 +643,14 @@ def playGame(player_name):
             # Leveling up
             print("Congrats you won! You gained " + str(experience_points) + " experience points and " + str(
                 int(experience_points / 3)) + " coins.")
-            if experience_points >= 800:
+            if experience_points >= 2000:
                 level_up(good_guys, player_name)
-                experience_points = experience_points - 800
+                experience_points = experience_points - 2000
             # Leveled loot system
             leveled_loot_system(good_guys, good_guys[player_name]["inventory"])
             user_move_on()
-    print_intro_text(63, 67)
+    # reads out the ending text
+    print_text_from_file(63, 67)
     return True
 
 
