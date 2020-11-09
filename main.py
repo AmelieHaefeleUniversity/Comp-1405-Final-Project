@@ -233,7 +233,7 @@ def player_turn(good_guys_team, bad_guys_team, action, player_name, experience_p
                                                            good_guys_team[player_name]["inventory"][action]['effect']
             # Print out what happened
             print_rest(player_name)
-            return good_guys_team, bad_guys_team, action, player_name
+            return experience_points
         # Printing out all players on their team
         print("Who do you want to target?\n")
         for ally_names in good_guys_team:
@@ -274,7 +274,7 @@ def player_turn(good_guys_team, bad_guys_team, action, player_name, experience_p
                 print(to_print)
                 add_to_file(to_print)
 
-    return good_guys_team, bad_guys_team, action, player_name, experience_points
+    return experience_points
 
 
 def do_allies_need_healing(team, player_name):
@@ -283,7 +283,7 @@ def do_allies_need_healing(team, player_name):
     for key in team:
         # Checks if anyone needs to be healed
         if team[key]["health"] <= 10:
-            if team[key]["health"] < lowestHealth:
+            if team[key]["health"] <= lowestHealth:
                 lowestHealth_Ally = str(key)
                 lowestHealth = team[key]['health']
 
@@ -318,7 +318,7 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
         # If Danielle has less than 2 AP points she will choose to rest
         if good_guys_team["Danielle"]['action_points'] < 2:
             good_guys_team["Danielle"]['action_points'] = good_guys_team["Danielle"]['action_points'] + 2
-            return good_guys_team, bad_guys_team, experience_points
+            return experience_points
         # If Danielle is above 4 ap then use their strongest attack to attack the bad guy NPC with the most health
         elif good_guys_team["Danielle"]['action_points'] > 4:
             # Removes the number of action points it takes to use her bow
@@ -372,7 +372,7 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
         if good_guys_team['Peter']['action_points'] < 4:
             good_guys_team['Peter']['action_points'] = good_guys_team['Peter']['action_points'] + 2
             print_rest("Peter")
-            return good_guys_team, bad_guys_team, experience_points
+            return experience_points
         # Checks if any of the members on his team are 10 health or below
         lowestHealth_Ally = do_allies_need_healing(good_guys_team, player_name)
         if lowestHealth_Ally != "-1":
@@ -406,10 +406,10 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
                         4 + good_guys_team["Peter"]["level"])
                 print_harm_action("Peter", "fireball", roll, target,
                                   4 + good_guys_team["Peter"]["level"])
-                return good_guys_team, bad_guys_team, experience_points
+                return experience_points
             if roll < 10:
                 print_miss_action("Peter", "fireball", roll, target)
-    return good_guys_team, bad_guys_team, experience_points
+    return experience_points
 
 
 def normal_bad_guys_turn(good_guys_team, bad_guys_team):
@@ -468,6 +468,7 @@ def fight(good_guys_team, bad_guys_team, player_name, experience_points):
         action = (get_user_action(good_guys_team, player_name)).lower()
 
         outcome = player_turn(good_guys_team, bad_guys_team, action, player_name, experience_points)
+        experience_points = experience_points + outcome
         # checks if the player has enough action-points to do their chosen action
         while outcome == -1:
             # keeps checking until it gets a valid action
@@ -477,7 +478,7 @@ def fight(good_guys_team, bad_guys_team, player_name, experience_points):
             if outcome != -1:
                 break
         # The good guys turn
-        good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_points)
+        experience_points = good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_points) + experience_points
 
         # Checks if it's a normal bad guys turn or the boss fight
         for key in bad_guys_team:
@@ -637,7 +638,7 @@ def playGame(player_name):
                 int(experience_points / 3)) + " coins.")
             if experience_points >= 800:
                 level_up(good_guys, player_name)
-                experience_points = 0
+                experience_points = experience_points - 800
             # Leveled loot system
             leveled_loot_system(good_guys, good_guys[player_name]["inventory"])
             user_move_on()

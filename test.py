@@ -1,6 +1,7 @@
 from main import getGameData, normal_bad_guys_turn, setTestRolls, good_guys_NPC_turn, highest_health_target, \
     lowest_health_target
 
+
 def test_bad_guy_AI():
     test_player_name = "Test1"
     global TEST_ROLLS
@@ -14,6 +15,7 @@ def test_bad_guy_AI():
     setTestRolls([10, 10])
     normal_bad_guys_turn(good_guys, bad_guys)
     assert good_guys["Peter"]["health"] == 0
+
 
 def test_Peter_fight_AI():
     test_player_name = "Test1"
@@ -29,6 +31,11 @@ def test_Peter_fight_AI():
     good_guys["Danielle"]["health"] = 10
     good_guys_NPC_turn(good_guys, bad_guys, test_player_name, experience_points)
     assert good_guys["Danielle"]["health"] == 13
+
+    setTestRolls([0, 10])
+    good_guys[test_player_name]["health"] = 7
+    good_guys_NPC_turn(good_guys, bad_guys, test_player_name, experience_points)
+    assert good_guys[test_player_name]["health"] == 10
 
 
 def test_Danielle_fight_AI():
@@ -114,7 +121,7 @@ def test_enemy_rest():
 
     normal_bad_guys_turn(good_guys, bad_guys)
     # Did this work as expect
-    assert good_guys[test_player_name]["health"] == 6
+    assert good_guys[test_player_name]["health"] == 5
     assert bad_guys["Prescott"]["action_points"] == 3
 
 
@@ -143,4 +150,3 @@ if __name__ == "__main__":
     test_Peter_fight_AI()
     test_Danielle_fight_AI()
     test_bad_guy_AI()
-
