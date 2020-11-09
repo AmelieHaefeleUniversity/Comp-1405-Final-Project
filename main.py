@@ -15,10 +15,12 @@ def d20():
         return TEST_ROLLS.pop(0)
     return randint(0, 20)
 
+
 # Allows tests to specify test rolls. Needed python globals are not shared across modules.
 def setTestRolls(to_roll):
     global TEST_ROLLS
     TEST_ROLLS = to_roll
+
 
 # clears the screen
 def clear():
@@ -280,7 +282,7 @@ def player_turn(good_guys_team, bad_guys_team, action, player_name, experience_p
 
 
 def do_allies_need_healing(team, player_name):
-    lowestHealth_Ally = player_name
+    lowestHealth_Ally = "-1"
     lowestHealth = team[player_name]['health']
     for key in team:
         # Checks if anyone needs to be healed
@@ -288,8 +290,7 @@ def do_allies_need_healing(team, player_name):
             if team[key]["health"] < lowestHealth:
                 lowestHealth_Ally = str(key)
                 lowestHealth = team[key]['health']
-        else:
-            return "-1"
+
     return lowestHealth_Ally
 
 
@@ -305,7 +306,7 @@ def highest_health_target(team):
     # checks which player on the good guys team has the lowest health and saves it
     for key in team:
         # Checks it they're dead
-        if highestHealth > team[key]['health'] > 0:
+        if highestHealth < team[key]['health'] > 0:
             highest_health_NPC = str(key)
             highestHealth = team[key]['health']
     return highest_health_NPC
@@ -332,18 +333,19 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
             if roll >= 10:
                 # Remove health from the enemy she targets for amount of damage she does (at her current level)
                 bad_guys_team[target]['health'] = bad_guys_team[target]['health'] - (
-                        3 + good_guys_team["Danielle"]["level"])
+                        4 + good_guys_team["Danielle"]["level"])
                 # Add experience points for the hit
                 experience_points = experience_points + 50
                 # Prints out what happens
                 print_harm_action("Danielle", "bow", roll, target,
-                                  3 + good_guys_team["Danielle"]["level"])
+                                  4 + good_guys_team["Danielle"]["level"])
             # If her roll fails
             elif roll < 10:
                 # Prints out what happens
                 print_miss_action("Danielle", "bow", roll, target)
 
-        # If she is below 4 ap and less than or equal to 2 AP point she will attack the strongest enemy with her knife
+        # If she is below 4 ap or below and less than or equal to 2 AP point she will attack the strongest enemy with
+        # her knife
         elif good_guys_team["Danielle"]['action_points'] >= 2:
             #  Removes the number of action points it takes to use her knife
             good_guys_team["Danielle"]['action_points'] = good_guys_team["Danielle"]['action_points'] - 1
@@ -353,12 +355,12 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
             if roll >= 10:
                 # Remove health from the enemy she targets for amount of damage she does (at her current level)
                 bad_guys_team[target]['health'] = bad_guys_team[target]['health'] - (
-                        1 + good_guys_team["Danielle"]["level"])
+                        2 + good_guys_team["Danielle"]["level"])
                 # Add experience points for the hit
                 experience_points = experience_points + 50
                 # Prints out what happens
                 print_harm_action("Danielle", "knife", roll, target,
-                                  1 + good_guys_team["Danielle"]["level"])
+                                  2 + good_guys_team["Danielle"]["level"])
             # If her roll fails
             elif roll < 10:
                 # Prints out what happens
@@ -627,6 +629,7 @@ def playGame(player_name):
             good_guys = saved_good_guys
             bad_guys = saved_bad_guys
             print("You Died. Don't lose hope!\n")
+            add_to_file("You died\n")
             continue_playing = input("Do you want to continue(Yes/No)\n")
             if continue_playing.lower() == "no":
                 break
@@ -644,6 +647,7 @@ def playGame(player_name):
             user_move_on()
     print_intro_text(63, 67)
     return True
+
 
 # Will only run when someone runs main.py to allow for simulated test
 if __name__ == "__main__":
