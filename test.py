@@ -1,6 +1,19 @@
 from main import getGameData, normal_bad_guys_turn, setTestRolls, good_guys_NPC_turn, highest_health_target, \
     lowest_health_target
 
+def test_bad_guy_AI():
+    test_player_name = "Test1"
+    global TEST_ROLLS
+    good_guys, stages_list, experience_points = getGameData(test_player_name)
+    bad_guys = stages_list[0]["bad_guys"]
+    setTestRolls([10, 10])
+    normal_bad_guys_turn(good_guys, bad_guys)
+    assert good_guys[test_player_name]["health"] == 11
+
+    good_guys["Peter"]["health"] = 9
+    setTestRolls([10, 10])
+    normal_bad_guys_turn(good_guys, bad_guys)
+    assert good_guys["Peter"]["health"] == 0
 
 def test_Peter_fight_AI():
     test_player_name = "Test1"
@@ -129,3 +142,5 @@ if __name__ == "__main__":
     test_lowest_health_target()
     test_Peter_fight_AI()
     test_Danielle_fight_AI()
+    test_bad_guy_AI()
+

@@ -4,10 +4,6 @@ import copy
 TEST_ROLLS = []
 
 
-# TODO
-# a. Ensure that the text is printed for each stage
-# b.
-
 # The d20 dice
 def d20():
     global TEST_ROLLS

@@ -467,3 +467,82 @@ Danielle used their bow and rolled a(n) 10 hitting Prescott for 5 damage
 Peter used their fireball and rolled a(n) 0 missing Prescott
 Danielle used their knife and rolled a(n) 10 hitting Prescott for 3 damage
 Peter used their fireball and rolled a(n) 0 missing Prescott
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott rested regaining 2 Action Points
+Danielle used their bow and rolled a(n) 15 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Prescott
+Peter used their fireball and rolled a(n) 10 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Alastair
+Peter used heal and rolled a(n) 10 succeeding healing Danielle for 3 health
+Danielle used their bow and rolled a(n) 10 hitting Prescott for 5 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Danielle used their knife and rolled a(n) 10 hitting Prescott for 3 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Alastair used their slashed and rolled a(n) 10 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott rested regaining 2 Action Points
+Danielle used their bow and rolled a(n) 15 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Prescott
+Peter used their fireball and rolled a(n) 10 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Alastair
+Peter used heal and rolled a(n) 10 succeeding healing Danielle for 3 health
+Danielle used their bow and rolled a(n) 10 hitting Prescott for 5 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Danielle used their knife and rolled a(n) 10 hitting Prescott for 3 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Alastair used their slashed and rolled a(n) 10 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 10 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott rested regaining 2 Action Points
+Danielle used their bow and rolled a(n) 15 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Prescott
+Peter used their fireball and rolled a(n) 10 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Alastair
+Peter used heal and rolled a(n) 10 succeeding healing Danielle for 3 health
+Danielle used their bow and rolled a(n) 10 hitting Prescott for 5 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Danielle used their knife and rolled a(n) 10 hitting Prescott for 3 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Alastair used their slashed and rolled a(n) 10 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott rested regaining 2 Action Points
+Danielle used their bow and rolled a(n) 15 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Prescott
+Peter used their fireball and rolled a(n) 10 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Alastair
+Peter used heal and rolled a(n) 10 succeeding healing Danielle for 3 health
+Danielle used their bow and rolled a(n) 10 hitting Prescott for 5 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Danielle used their knife and rolled a(n) 10 hitting Prescott for 3 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Alastair used their slashed and rolled a(n) 10 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 15 hitting Test1 for 3 damage
+Prescott rested regaining 2 Action Points
+Danielle used their bow and rolled a(n) 15 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Prescott
+Peter used their fireball and rolled a(n) 10 hitting Prescott for 5 damage
+Danielle used their bow and rolled a(n) 0 missing Alastair
+Peter used heal and rolled a(n) 10 succeeding healing Danielle for 3 health
+Danielle used their bow and rolled a(n) 10 hitting Prescott for 5 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Danielle used their knife and rolled a(n) 10 hitting Prescott for 3 damage
+Peter used their fireball and rolled a(n) 0 missing Prescott
+Alastair used their slashed and rolled a(n) 10 hitting Test1 for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Test1 for 6 damage
+Alastair used their slashed and rolled a(n) 10 hitting Peter for 3 damage
+Prescott used their slashed and rolled a(n) 10 hitting Peter for 6 damage
