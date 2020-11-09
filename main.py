@@ -371,6 +371,7 @@ def good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_po
         # If he has less than 4 action points he will chose to rest
         if good_guys_team['Peter']['action_points'] < 4:
             good_guys_team['Peter']['action_points'] = good_guys_team['Peter']['action_points'] + 2
+            print_rest("Peter")
             return good_guys_team, bad_guys_team, experience_points
         # Checks if any of the members on his team are 10 health or below
         lowestHealth_Ally = do_allies_need_healing(good_guys_team, player_name)
@@ -429,10 +430,10 @@ def normal_bad_guys_turn(good_guys_team, bad_guys_team):
                 # If their roll succeeds
                 if roll >= 10:
                     # calculates their damage based on their level
-                    damage = bad_guys_team[bad_guy]["level"] * 3
+                    damage = bad_guys_team[bad_guy]["level"] + 3
                     # removes the health from the target they attack
                     good_guys_team[target]['health'] = good_guys_team[target]['health'] - (
-                            bad_guys_team[bad_guy]["level"] * 3)
+                            bad_guys_team[bad_guy]["level"] + 3)
                     # Prints out what happens
                     print_harm_action(bad_guy, "slashed", roll, target, damage)
                 # If their roll fails
@@ -452,13 +453,12 @@ def fight(good_guys_team, bad_guys_team, player_name, experience_points):
             return -1
         # Goes through each enemy in the list (regular indexing doesn't work cause dictionaries)
 
-        # Currently not working rn
         for key in bad_guys_team:
             # Adds 1 to the number of dead if the enemies health has reached 0
             if bad_guys_team[key]['health'] <= 0:
                 number_dead += 1
             # If all of the enemies are dead then the good guys have won and it returns true
-            if number_dead == len(bad_guys_team):
+            if number_dead == len(bad_guys_team) + 1:
                 return experience_points
 
         user_move_on()
