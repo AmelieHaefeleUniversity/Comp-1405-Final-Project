@@ -46,11 +46,8 @@ Boss Fight()
 You enter the dark and eerie castle of Officum alone. The dark shades of purple protruding from the castle grounds seemed to have
 seeped into the lush forest like some horrible plague. The sky is dark and just the sight of this large castle ahead of you fills
 you with dread trying to strip out any hope you may still be holding onto. But you enter anyway because there’s no way but forward.
+You stand alone shaking feeling as if you're about to give up.
 
-Boss_first_ end()
-You feel your body giving up as you shrink to the floor gasping for air “It’s not fair!” You yell into the void, but no one answers.
-
-Boss_fight_help()
 Just as you start to feel the unfamiliar grasp of defeat set in a bright spark fills your heart healing you to full health.
 “Hey idiot you didn’t think you could get through this alone could you?” Danielle said standing at your side. “Ya c’mon dude
 we’re always here for you!” Peter said running up and hugging you. Danielle smiled, giving you a hard but friendly pat on the back,

@@ -186,7 +186,8 @@ def get_user_action(good_guys_team, player_name):
         # Prints out letting the user know they entered and incorrect value
         else:
             # Else it tells the player what to do and continues asking into a valid actions inputted
-            print("Please enter a proper value(ie enter 'heal', if you want to heal)")
+            print("Please enter a proper value(ie enter 'heal', if you want to heal) refer to the listed actions "
+                  "above for other options")
 
 
 def player_turn(good_guys_team, bad_guys_team, action, player_name, experience_points):
@@ -478,7 +479,8 @@ def fight(good_guys_team, bad_guys_team, player_name, experience_points):
             if outcome != -1:
                 break
         # The good guys turn
-        experience_points = good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name, experience_points) + experience_points
+        experience_points = good_guys_NPC_turn(good_guys_team, bad_guys_team, player_name,
+                                               experience_points) + experience_points
 
         # Checks if it's a normal bad guys turn or the boss fight
         for key in bad_guys_team:
@@ -593,7 +595,7 @@ def getGameData(player_name):
     # Information that is included in each stage that it needs to have in order to run
     stages_list = [{"StageName": "First Fight", "TextLineToPrint": (10, 23), "bad_guys": fight_one},
                    {"StageName": "Second Fight", "TextLineToPrint": (28, 43), "bad_guys": fight_two},
-                   {"StageName": "Boss Fight", "TextLineToPrint": (47, 49), "bad_guys": final_fight}]
+                   {"StageName": "Boss Fight", "TextLineToPrint": (45, 56), "bad_guys": final_fight}]
 
     return good_guys, stages_list, experience_points
 
@@ -611,12 +613,13 @@ def play_game(player_name):
                      "recorded here.\n")
     fight_info.close()
     # Starts at stage 0
-    stage_counter = 2
+    stage_counter = 0
 
     # Reads out the Intro text
     print_text_from_file(1, 7, lines)
+    user_move_on()
 
-    bad_guys = stages_list[2]["bad_guys"]
+    bad_guys = stages_list[0]["bad_guys"]
     while stage_counter < len(stages_list):
 
         # Saves stats so they don't get rest
@@ -650,7 +653,8 @@ def play_game(player_name):
             leveled_loot_system(good_guys, good_guys[player_name]["inventory"])
             user_move_on()
     # reads out the ending text
-    print_text_from_file(63, 67)
+    print_text_from_file(58, 63, lines)
+    user_move_on()
     return True
 
 
